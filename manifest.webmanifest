@@ -1,0 +1,17 @@
+{
+  "name": "교사링크 v6",
+  "short_name": "교사링크",
+  "description": "유치원/어린이집 종사자용 기관 지도·익명 리뷰·채용·커뮤니티 앱",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fdf8f2",
+  "theme_color": "#ff6f3d",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

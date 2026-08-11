@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>교사링크 v6 - 유치원·어린이집 커리어 앱</title>
+    <meta
+      name="description"
+      content="유치원과 어린이집 선생님·원장을 위한 익명 리뷰, 채용, 커뮤니티 플랫폼"
+    />
+    <meta name="theme-color" content="#f25f38" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://challenges.cloudflare.com https://dapi.kakao.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://challenges.cloudflare.com https://dapi.kakao.com https://*.kakao.com https://*.daum.net; img-src 'self' data: blob: https://challenges.cloudflare.com https://*.kakao.com https://*.kakaocdn.net https://*.daum.net https://*.daumcdn.net; style-src 'self' 'unsafe-inline'; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self' https://*.supabase.co; upgrade-insecure-requests"
+    />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="./manifest.webmanifest?v=6.5.0" />
+    <link rel="stylesheet" href="./styles.css?v=6.5.0" />
+  </head>
+  <body>
+    <div class="ambient" aria-hidden="true">
+      <span class="orb orb-a"></span>
+      <span class="orb orb-b"></span>
+      <span class="orb orb-c"></span>
+    </div>
+
+    <section id="authGate" class="auth-gate" aria-labelledby="authTitle">
+      <div class="auth-shell">
+        <article class="auth-story">
+          <div class="auth-art" aria-hidden="true">
+            <img src="./assets/teacher-network-hero.webp" alt="" width="1440" height="960" fetchpriority="high" />
+          </div>
+          <div class="brand-mark" aria-hidden="true">교</div>
+          <p class="eyebrow">Korea Early Education Work Network</p>
+          <h1 id="authTitle">일하는 선생님들의<br />솔직한 커리어 공간</h1>
+          <p class="auth-lead">
+            유치원과 어린이집의 실제 근무 경험을 익명으로 나누고,<br />나에게 맞는 다음 일자리를 찾아보세요.
+          </p>
+          <div class="auth-proof" aria-label="교사링크 주요 기능">
+            <span>익명 시설 리뷰</span>
+            <span>검증된 채용 공고</span>
+            <span>교직원 커뮤니티</span>
+          </div>
+          <div class="story-note">
+            <strong>신원은 숨기고, 경험은 연결합니다.</strong>
+            <p>작성자 정보는 공개되지 않으며 개인정보 패턴은 등록 전에 자동으로 가립니다.</p>
+          </div>
+        </article>
+
+        <article class="auth-card">
+          <div class="auth-card-head">
+            <span class="status-dot" aria-hidden="true"></span>
+            <p>안전한 계정으로 시작하기</p>
+          </div>
+          <h2>교사링크에 오신 것을 환영합니다</h2>
+          <p class="subtitle">카카오 로그인 후 내 역할과 지역을 설정할 수 있어요.</p>
+
+          <div class="auth-actions">
+            <button id="cloudKakaoBtn" class="btn kakao" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 4C6.9 4 3 7.1 3 10.9c0 2.5 1.7 4.7 4.3 6l-.9 3.2c-.1.4.3.7.6.5l3.8-2.5c.4 0 .8.1 1.2.1 5.1 0 9-3.1 9-7.3S17.1 4 12 4Z" />
+              </svg>
+              카카오로 시작하기
+            </button>
+            <button id="cloudAuthBtn" class="btn auth-secondary" type="button">익명으로 먼저 둘러보기</button>
+            <button id="demoModeBtn" class="btn text-button" type="button">로컬 데모로 둘러보기</button>
+          </div>
+
+          <div id="captchaContainer" class="captcha-slot" aria-label="봇 방지 확인"></div>
+          <p id="authCloudStatus" class="auth-status">클라우드 연결 상태를 확인하고 있습니다.</p>
+          <p class="auth-terms">계속하면 서비스 운영정책과 개인정보 처리 안내에 동의하는 것으로 간주합니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <div id="appShell" class="app-shell" hidden>
+      <header class="app-topbar">
+        <button class="brand-button" type="button" data-go-page="home" aria-label="교사링크 홈">
+          <span class="mini-mark" aria-hidden="true">교</span>
+          <span>
+            <strong>교사링크</strong>
+            <small>선생님의 다음을 잇다</small>
+          </span>
+        </button>
+        <div class="top-meta">
+          <div id="profileBadge" class="profile-badge">프로필 설정 필요</div>
+          <div id="notificationWrap" class="notification-wrap">
+            <button
+              id="notificationBtn"
+              class="notification-button"
+              type="button"
+              aria-label="알림센터 열기"
+              aria-expanded="false"
+              aria-controls="notificationTray"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 17h12l-1.4-2.1V10a4.6 4.6 0 0 0-9.2 0v4.9L6 17Zm4 2a2.2 2.2 0 0 0 4 0" /></svg>
+              <span id="notificationBadge" class="notification-badge" hidden>0</span>
+            </button>
+            <section id="notificationTray" class="notification-tray" aria-labelledby="notificationTitle" hidden>
+              <div class="notification-head">
+                <div>
+                  <p class="eyebrow">UPDATES</p>
+                  <h2 id="notificationTitle">알림센터</h2>
+                </div>
+                <button id="markNotificationsReadBtn" class="link-btn" type="button">모두 읽음</button>
+              </div>
+              <div id="notificationList" class="notification-list"></div>
+              <div class="notification-controls">
+                <button id="notificationPermissionBtn" class="btn ghost compact" type="button">브라우저 알림 켜기</button>
+                <button id="notificationSoundBtn" class="btn ghost compact" type="button" aria-pressed="true">소리 켜짐</button>
+                <button id="notificationTestBtn" class="btn primary compact" type="button">테스트 알림</button>
+              </div>
+              <p id="notificationPrivacyHint" class="hint">잠금화면에는 상세 내용 대신 일반 문구만 표시됩니다.</p>
+            </section>
+          </div>
+          <button id="profileBtn" class="avatar-button" type="button" aria-label="내 정보 열기">나</button>
+        </div>
+      </header>
+
+      <div class="app-frame">
+        <nav class="app-nav" aria-label="주요 메뉴">
+          <p class="nav-caption">MENU</p>
+          <div class="tabs" role="tablist">
+            <button class="nav-btn tab-btn active" data-tab="home" role="tab">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20h-5v-6H9v6H4v-9.5Z" /></svg>
+              <span>홈</span>
+            </button>
+            <button class="nav-btn tab-btn" data-tab="reviews" role="tab">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5" /></svg>
+              <span>시설 리뷰</span>
+            </button>
+            <button class="nav-btn tab-btn" data-tab="facilities" role="tab">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Zm0-8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /></svg>
+              <span>기관 지도</span>
+            </button>
+            <button class="nav-btn tab-btn" data-tab="jobs" role="tab">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v11H4zM9 8V5h6v3M4 12h16" /></svg>
+              <span>채용</span>
+            </button>
+            <button class="nav-btn tab-btn" data-tab="community" role="tab">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v12H9l-5 3V5Zm4 4h8M8 13h5" /></svg>
+              <span>커뮤니티</span>
+            </button>
+            <button class="nav-btn tab-btn" data-tab="profile" role="tab">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-7 8c.7-4 3-6 7-6s6.3 2 7 6" /></svg>
+              <span>내 정보</span>
+            </button>
+            <button class="nav-btn tab-btn operator-nav" data-tab="moderation" role="tab" hidden>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 7 3v5c0 4.6-2.8 8-7 10-4.2-2-7-5.4-7-10V6l7-3Zm-3 8 2 2 4-4" /></svg>
+              <span>운영센터</span>
+            </button>
+          </div>
+          <div class="nav-trust">
+            <span class="status-dot" aria-hidden="true"></span>
+            <p>개인정보 보호 모드</p>
+          </div>
+        </nav>
+
+        <main class="page-stage">
+          <section id="homePanel" class="panel active" aria-labelledby="homeTitle">
+            <article class="home-hero">
+              <div>
+                <p class="eyebrow">TODAY AT TEACHER LINK</p>
+                <h2 id="homeTitle"><span id="homeAlias">선생님</span>, 오늘은 무엇을 찾고 있나요?</h2>
+                <p>현장의 목소리를 확인하고 더 나은 다음 선택을 준비해 보세요.</p>
+              </div>
+              <div class="hero-stamp" aria-hidden="true">
+                <span>익명</span>
+                <strong>100%</strong>
+              </div>
+            </article>
+
+            <div class="quick-grid">
+              <button class="quick-card facility-quick" type="button" data-go-page="facilities">
+                <span class="quick-index">01</span>
+                <strong>내 근처 기관 찾기</strong>
+                <p>도로명주소와 지도에서 주변 유치원·어린이집을 확인하세요.</p>
+                <span class="quick-arrow">기관 지도로 이동</span>
+              </button>
+              <button class="quick-card review-quick" type="button" data-go-page="reviews">
+                <span class="quick-index">02</span>
+                <strong>시설 리뷰 보기</strong>
+                <p>급여, 업무강도, 리더십을 실제 경험으로 확인하세요.</p>
+                <span class="quick-arrow">리뷰 페이지로 이동</span>
+              </button>
+              <button class="quick-card job-quick" type="button" data-go-page="jobs">
+                <span class="quick-index">03</span>
+                <strong>새 채용 찾기</strong>
+                <p>지역과 근무 조건에 맞는 유치원·어린이집 공고를 모았어요.</p>
+                <span class="quick-arrow">채용 페이지로 이동</span>
+              </button>
+              <button class="quick-card community-quick" type="button" data-go-page="community">
+                <span class="quick-index">04</span>
+                <strong>동료에게 묻기</strong>
+                <p>수업, 노무, 이직 고민을 익명으로 나눌 수 있어요.</p>
+                <span class="quick-arrow">커뮤니티로 이동</span>
+              </button>
+            </div>
+
+            <article class="card stat-card home-stats">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">LIVE BOARD</p>
+                  <h3>지금 교사링크</h3>
+                </div>
+                <p>공개된 최신 데이터 기준</p>
+              </div>
+              <div class="stat-grid">
+                <div><p>시설 리뷰</p><strong id="statReviews">0</strong><span>개의 경험</span></div>
+                <div><p>채용 공고</p><strong id="statJobs">0</strong><span>개의 기회</span></div>
+                <div><p>커뮤니티</p><strong id="statCommunity">0</strong><span>개의 대화</span></div>
+                <div><p>처리 대기 신고</p><strong id="statReports">0</strong><span>건</span></div>
+              </div>
+            </article>
+
+            <div class="home-lower-grid">
+              <article class="card insight-card">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">WORKPLACE SIGNAL</p>
+                    <h3>근무환경 인사이트</h3>
+                  </div>
+                </div>
+                <div class="insight-grid" id="insightGrid"></div>
+                <div class="bar-wrap">
+                  <h3>지역별 리뷰 수</h3>
+                  <div id="regionBars" class="bars"></div>
+                </div>
+              </article>
+              <article class="card guide-card">
+                <p class="eyebrow">SAFETY FIRST</p>
+                <h3>익명 작성 가이드</h3>
+                <ul>
+                  <li><span>1</span>실명, 연락처, 아동 정보는 적지 않아요.</li>
+                  <li><span>2</span>본문의 실명·기관명·욕설·19금 표현은 **로 자동 가려요.</li>
+                  <li><span>3</span>신고 3회 이상 게시물은 자동으로 숨겨져요.</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <section id="facilitiesPanel" class="panel" aria-labelledby="facilitiesTitle">
+            <article class="page-heading map-heading">
+              <div>
+                <p class="eyebrow">EARLY EDUCATION MAP</p>
+                <h2 id="facilitiesTitle">기관 지도</h2>
+                <p>도로명주소로 확인하고 내 위치에서 가까운 기관부터 살펴보세요.</p>
+              </div>
+              <span class="page-number">MAP</span>
+            </article>
+
+            <article class="card panel-head facility-toolbar">
+              <div class="filters facility-filters">
+                <input id="facilitySearch" type="search" placeholder="기관명 또는 도로명주소 검색" aria-label="기관 검색" />
+                <select id="facilityTypeFilter" aria-label="기관 유형 필터">
+                  <option value="all">유치원 + 어린이집</option>
+                  <option value="유치원">유치원</option>
+                  <option value="어린이집">어린이집</option>
+                </select>
+                <select id="facilityRadiusFilter" aria-label="검색 반경">
+                  <option value="3">반경 3km</option>
+                  <option value="5" selected>반경 5km</option>
+                  <option value="10">반경 10km</option>
+                  <option value="all">거리 제한 없음</option>
+                </select>
+                <button id="nearbyFacilitiesBtn" class="btn primary" type="button">내 근처 보기</button>
+                <button id="demoLocationBtn" class="btn ghost" type="button">서울 중심 보기</button>
+              </div>
+              <p id="locationPrivacyHint" class="hint">내 위치는 거리 계산에만 사용하며 교사링크 계정·DB에 저장하지 않습니다.</p>
+            </article>
+
+            <div class="facility-map-grid">
+              <article class="card map-card">
+                <div class="list-head">
+                  <div><p class="eyebrow">LIVE MAP</p><h3>주변 기관</h3></div>
+                  <p id="facilityMapMode">지도 준비 중</p>
+                </div>
+                <div id="facilityMap" class="facility-map" role="application" aria-label="유치원과 어린이집 지도"></div>
+                <p id="facilityMapHint" class="map-hint">지도를 준비하고 있습니다.</p>
+              </article>
+
+              <article class="card form-card facility-register-card">
+                <div class="section-heading"><div><p class="eyebrow">ADD A PLACE</p><h3>기관 등록</h3></div><span class="pill">교사·원장</span></div>
+                <p class="hint">기관의 공개 정보만 입력해 주세요. 등록 후 검수 대기로 표시됩니다.</p>
+                <form id="facilityForm">
+                  <div class="form-grid two">
+                    <label>기관 유형<select name="facilityType" required><option value="유치원">유치원</option><option value="어린이집">어린이집</option></select></label>
+                    <label>기관명<input name="facilityName" type="text" minlength="2" maxlength="60" required /></label>
+                    <label>지역<select name="region" required><option value="">선택</option></select></label>
+                  </div>
+                  <label>도로명주소<input name="roadAddress" type="text" minlength="8" maxlength="120" placeholder="예: 서울특별시 종로구 세종대로 1" autocomplete="street-address" required /></label>
+                  <div class="address-actions">
+                    <button id="verifyFacilityAddressBtn" class="btn ghost" type="button">도로명주소 확인</button>
+                    <span id="facilityAddressStatus" class="address-status" aria-live="polite">주소 확인이 필요합니다.</span>
+                  </div>
+                  <button class="btn primary wide" type="submit">기관 등록 요청</button>
+                </form>
+              </article>
+            </div>
+
+            <article class="card list-card facility-results-card">
+              <div class="list-head"><div><p class="eyebrow">PLACES</p><h3>기관 목록</h3></div><p id="facilityCount">0곳</p></div>
+              <div id="facilityList" class="facility-list"></div>
+            </article>
+          </section>
+
+          <section id="reviewsPanel" class="panel" aria-labelledby="reviewsTitle">
+            <article class="page-heading">
+              <div>
+                <p class="eyebrow">WORKPLACE REVIEWS</p>
+                <h2 id="reviewsTitle">시설 리뷰</h2>
+                <p>실제 근무자가 남긴 구조화된 경험을 확인하세요.</p>
+              </div>
+              <span class="page-number">01</span>
+            </article>
+
+            <article class="card panel-head">
+              <div class="filters four">
+                <input id="reviewSearch" type="text" placeholder="시설명 검색" aria-label="시설명 검색" />
+                <select id="reviewFacilityType" aria-label="시설 유형 필터">
+                  <option value="all">시설 유형 전체</option>
+                  <option value="유치원">유치원</option>
+                  <option value="어린이집">어린이집</option>
+                </select>
+                <select id="reviewRegion" aria-label="리뷰 지역 필터"><option value="all">지역 전체</option></select>
+                <select id="reviewMinRating" aria-label="최소 평점 필터">
+                  <option value="0">평점 전체</option>
+                  <option value="3">3점 이상</option>
+                  <option value="4">4점 이상</option>
+                </select>
+              </div>
+            </article>
+
+            <div class="content-split">
+              <article class="card form-card sticky-form">
+                <div class="section-heading">
+                  <div><p class="eyebrow">SHARE</p><h3>익명 리뷰 작성</h3></div>
+                </div>
+                <form id="reviewForm">
+                  <div class="form-grid two">
+                    <label>시설 유형<select name="facilityType" required><option value="">선택</option><option value="유치원">유치원</option><option value="어린이집">어린이집</option></select></label>
+                    <label>시설명<input name="facilityName" type="text" maxlength="40" required /></label>
+                    <label>지역<select name="region" required><option value="">선택</option></select></label>
+                    <label>총 평점<input name="overall" type="number" min="1" max="5" step="0.5" value="4" required /></label>
+                  </div>
+                  <div class="score-grid">
+                    <label>급여<input name="payScore" type="number" min="1" max="5" value="3" required /></label>
+                    <label>업무<input name="workloadScore" type="number" min="1" max="5" value="3" required /></label>
+                    <label>리더십<input name="leadershipScore" type="number" min="1" max="5" value="3" required /></label>
+                    <label>성장<input name="growthScore" type="number" min="1" max="5" value="3" required /></label>
+                  </div>
+                  <label>태그<input name="tag" type="text" maxlength="24" placeholder="#업무분담명확" required data-policy-preview /></label>
+                  <label>리뷰 내용<textarea name="content" rows="5" maxlength="500" placeholder="실명·연락처·아동정보 없이 근무경험 중심으로 작성" required data-policy-preview></textarea></label>
+                  <p class="hint policy-hint" id="reviewPolicyHint">실명·본문 기관명·욕설·19금 표현·연락처는 등록 시 ** 처리됩니다.</p>
+                  <button class="btn primary wide" type="submit">익명 리뷰 등록</button>
+                </form>
+              </article>
+
+              <article class="card list-card">
+                <div class="list-head"><div><p class="eyebrow">LATEST</p><h3>리뷰 피드</h3></div><p id="reviewCount">0건</p></div>
+                <div id="reviewList" class="stack-list"></div>
+              </article>
+            </div>
+          </section>
+
+          <section id="jobsPanel" class="panel" aria-labelledby="jobsTitle">
+            <article class="page-heading visual-heading">
+              <div>
+                <p class="eyebrow">CAREER BOARD</p>
+                <h2 id="jobsTitle">채용</h2>
+                <p>근무 조건을 비교하고 나에게 맞는 다음 기관을 찾아보세요.</p>
+              </div>
+              <figure class="heading-art">
+                <img src="./assets/career-desk.webp" alt="정돈된 교사 채용 준비 책상 일러스트" width="900" height="900" loading="lazy" decoding="async" />
+              </figure>
+            </article>
+
+            <article class="card panel-head">
+              <div class="filters three">
+                <input id="jobSearch" type="text" placeholder="기관명 또는 직무 검색" aria-label="채용 검색" />
+                <select id="jobRegionFilter" aria-label="채용 지역 필터"><option value="all">지역 전체</option></select>
+                <select id="jobOrderBy" aria-label="채용 정렬"><option value="latest">최신순</option><option value="salary">급여 문자열 순</option></select>
+              </div>
+            </article>
+
+            <div class="content-split">
+              <article class="card form-card sticky-form">
+                <div class="section-heading"><div><p class="eyebrow">FOR DIRECTOR</p><h3>채용 공고 등록</h3></div></div>
+                <p class="hint" id="jobFormHint"></p>
+                <form id="jobForm">
+                  <div class="form-grid two">
+                    <label>기관명<input name="centerName" type="text" maxlength="40" required /></label>
+                    <label>모집 직무<input name="position" type="text" maxlength="40" required data-policy-preview /></label>
+                    <label>지역<select name="region" required><option value="">선택</option></select></label>
+                    <label>월급(세전)<input name="salary" type="text" maxlength="30" placeholder="240만원~270만원" required /></label>
+                    <label>근무형태<select name="employmentType" required><option value="정규직">정규직</option><option value="계약직">계약직</option><option value="파트타임">파트타임</option></select></label>
+                    <label>근무시간<input name="workHours" type="text" maxlength="24" placeholder="09:00-18:00" required /></label>
+                  </div>
+                  <label>마감일<input name="deadline" type="date" required /></label>
+                  <label>상세 설명<textarea name="description" rows="5" maxlength="500" required data-policy-preview></textarea></label>
+                  <p class="hint policy-hint" id="jobPolicyHint">실명·본문 기관명·욕설·19금 표현·연락처는 등록 시 ** 처리됩니다.</p>
+                  <button class="btn primary wide" type="submit">채용 공고 등록</button>
+                </form>
+              </article>
+
+              <article class="card list-card">
+                <div class="list-head"><div><p class="eyebrow">OPEN NOW</p><h3>오픈 공고</h3></div><p id="jobCount">0건</p></div>
+                <div id="jobList" class="stack-list"></div>
+              </article>
+            </div>
+          </section>
+
+          <section id="communityPanel" class="panel" aria-labelledby="communityTitle">
+            <article class="page-heading visual-heading">
+              <div>
+                <p class="eyebrow">TEACHERS' LOUNGE</p>
+                <h2 id="communityTitle">커뮤니티</h2>
+                <p>수업, 노무, 고충, 이직 이야기를 동료와 익명으로 나눠요.</p>
+              </div>
+              <figure class="heading-art">
+                <img src="./assets/teacher-community.webp" alt="동료 교사 세 명이 아이디어를 나누는 일러스트" width="900" height="900" loading="lazy" decoding="async" />
+              </figure>
+            </article>
+
+            <article class="card panel-head">
+              <div class="filters three">
+                <input id="communitySearch" type="text" placeholder="제목 또는 내용 검색" aria-label="커뮤니티 검색" />
+                <select id="communityCategoryFilter" aria-label="커뮤니티 카테고리 필터">
+                  <option value="all">카테고리 전체</option><option value="수업자료">수업자료</option><option value="노무상담">노무상담</option><option value="고충토로">고충토로</option><option value="이직상담">이직상담</option>
+                </select>
+                <select id="communityOrderBy" aria-label="커뮤니티 정렬"><option value="latest">최신순</option><option value="helpful">도움순</option></select>
+              </div>
+            </article>
+
+            <div class="content-split">
+              <article class="card form-card sticky-form">
+                <div class="section-heading"><div><p class="eyebrow">NEW TOPIC</p><h3>익명 글 작성</h3></div></div>
+                <form id="communityForm">
+                  <label>카테고리<select name="category" required><option value="수업자료">수업자료</option><option value="노무상담">노무상담</option><option value="고충토로">고충토로</option><option value="이직상담">이직상담</option></select></label>
+                  <label>제목<input name="topic" type="text" maxlength="60" required data-policy-preview /></label>
+                  <label>내용<textarea name="body" rows="6" maxlength="700" required data-policy-preview></textarea></label>
+                  <p class="hint policy-hint" id="communityPolicyHint">실명·본문 기관명·욕설·19금 표현·연락처는 등록 시 ** 처리됩니다.</p>
+                  <button class="btn primary wide" type="submit">익명 글 등록</button>
+                </form>
+              </article>
+
+              <article class="card list-card">
+                <div class="list-head"><div><p class="eyebrow">CONVERSATIONS</p><h3>커뮤니티 피드</h3></div><p id="communityCount">0건</p></div>
+                <div id="communityList" class="stack-list"></div>
+              </article>
+            </div>
+          </section>
+
+          <section id="profilePanel" class="panel" aria-labelledby="profileTitle">
+            <article class="page-heading">
+              <div>
+                <p class="eyebrow">MY TEACHER LINK</p>
+                <h2 id="profileTitle">내 정보</h2>
+                <p>프로필과 로그인 상태, 내 데이터 도구를 관리합니다.</p>
+              </div>
+              <span class="page-number">04</span>
+            </article>
+
+            <div class="profile-grid">
+              <article class="card profile-summary-card">
+                <div class="large-avatar" aria-hidden="true">나</div>
+                <div>
+                  <p class="eyebrow">MY PROFILE</p>
+                  <h3 id="profileSummaryText">프로필을 설정해 주세요</h3>
+                  <p class="hint">공개 화면에는 계정 정보 대신 익명 닉네임만 표시됩니다.</p>
+                </div>
+                <button id="editProfileBtn" class="btn ghost" type="button">프로필 수정</button>
+              </article>
+
+              <article class="card account-card">
+                <div class="section-heading"><div><p class="eyebrow">ACCOUNT</p><h3>로그인과 클라우드</h3></div><span class="status-dot"></span></div>
+                <p id="cloudStatus" class="account-status">연결 상태를 확인하고 있습니다.</p>
+                <p class="hint">공개 설정은 <code>config.js</code>에서만 읽고 비밀키는 브라우저에 저장하지 않습니다.</p>
+                <div class="account-actions">
+                  <button id="cloudLinkKakaoBtn" class="btn kakao compact" type="button">카카오 계정 연결</button>
+                  <button id="cloudSyncBtn" class="btn ghost" type="button">데이터 새로고침</button>
+                  <button id="cloudSignOutBtn" class="btn danger" type="button">로그아웃</button>
+                  <button id="exitDemoBtn" class="btn ghost" type="button">로그인 화면으로</button>
+                </div>
+              </article>
+
+              <article class="card tool-card">
+                <div class="section-heading"><div><p class="eyebrow">MY DATA</p><h3>데이터 도구</h3></div></div>
+                <div class="tool-actions">
+                  <button id="exportBtn" class="btn ghost">백업 내보내기</button>
+                  <label class="import-label"><input id="importInput" type="file" accept="application/json" hidden /><span class="btn ghost">백업 불러오기</span></label>
+                  <button id="resetBtn" class="btn danger">샘플 데이터로 초기화</button>
+                </div>
+              </article>
+
+              <article class="card notification-settings-card">
+                <div class="section-heading"><div><p class="eyebrow">NOTIFICATIONS</p><h3>알림과 소리</h3></div><span class="status-dot"></span></div>
+                <p class="hint">새 채용·커뮤니티 소식을 앱 안에서 받고, 원할 때만 기기 알림과 소리를 켤 수 있습니다.</p>
+                <div class="notification-settings-actions">
+                  <button id="profileNotificationBtn" class="btn ghost" type="button">브라우저 알림 설정</button>
+                  <button id="profileSoundBtn" class="btn ghost" type="button">알림 소리 설정</button>
+                </div>
+              </article>
+
+              <article class="card privacy-card">
+                <p class="eyebrow">PRIVACY</p>
+                <h3>익명성 안내</h3>
+                <p>다른 사용자에게 작성자 UUID와 로그인 정보는 공개되지 않습니다. 다만 악용 대응과 법적 요청 처리를 위해 서비스 운영자는 계정과 활동을 확인할 수 있습니다.</p>
+              </article>
+            </div>
+          </section>
+
+          <section id="moderationPanel" class="panel" aria-labelledby="moderationTitle">
+            <article class="page-heading">
+              <div><p class="eyebrow">OPERATOR ONLY</p><h2 id="moderationTitle">운영센터</h2><p>신고 내용을 검토하고 게시물의 숨김·복원을 처리합니다.</p></div>
+              <span class="page-number">OP</span>
+            </article>
+            <article class="card list-card">
+              <div class="list-head"><div><p class="eyebrow">REPORT QUEUE</p><h3>신고 큐</h3></div><p id="reportCount">0건</p></div>
+              <div id="reportList" class="stack-list"></div>
+            </article>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <section id="profileGate" class="modal-wrap" hidden>
+      <article class="modal-card">
+        <p class="eyebrow">ONE MORE STEP</p>
+        <h2>내 프로필을 설정해 주세요</h2>
+        <p class="subtitle">역할과 지역을 설정하면 내게 맞는 정보부터 보여드려요.</p>
+        <form id="profileForm" class="profile-form">
+          <div class="form-grid two">
+            <label>역할<select name="role" required><option value="">선택</option><option value="teacher">선생님</option><option value="director">원장</option></select></label>
+            <label>기관 유형<select name="orgType" required><option value="">선택</option><option value="유치원">유치원</option><option value="어린이집">어린이집</option></select></label>
+            <label>활동 지역<select name="region" required><option value="">선택</option></select></label>
+            <label>경력<select name="experience" required><option value="신입">신입</option><option value="1-3년">1-3년</option><option value="4-7년">4-7년</option><option value="8년+">8년+</option></select></label>
+          </div>
+          <label>표시 닉네임(익명용)<input name="alias" type="text" maxlength="24" placeholder="비워두면 자동 생성" /></label>
+          <div class="form-foot">
+            <button id="closeProfileBtn" class="btn ghost" type="button">닫기</button>
+            <button class="btn primary" type="submit">프로필 저장</button>
+          </div>
+        </form>
+      </article>
+    </section>
+
+    <section id="reportGate" class="modal-wrap" role="dialog" aria-modal="true" aria-labelledby="reportTitle" hidden>
+      <article class="modal-card report-modal-card">
+        <p class="eyebrow">SAFE REPORT</p>
+        <h2 id="reportTitle">신고 사유를 선택해 주세요</h2>
+        <p class="subtitle">개인정보가 다시 저장되지 않도록 신고 내용은 고정 분류로만 접수합니다.</p>
+        <form id="reportForm" class="profile-form">
+          <label>신고 분류
+            <select name="reason" required>
+              <option value="">선택</option>
+              <option value="개인정보 노출">개인정보 노출</option>
+              <option value="아동정보 노출">아동정보 노출</option>
+              <option value="명예훼손·모욕">명예훼손·모욕</option>
+              <option value="폭력·위협">폭력·위협</option>
+              <option value="성적·음란 표현">성적·음란 표현</option>
+              <option value="허위 채용·사기">허위 채용·사기</option>
+              <option value="스팸·광고">스팸·광고</option>
+              <option value="기타 정책 위반">기타 정책 위반</option>
+            </select>
+          </label>
+          <p class="hint">아동정보·폭력 신고는 운영센터에서 우선 확인해야 합니다.</p>
+          <div class="form-foot">
+            <button id="closeReportBtn" class="btn ghost" type="button">취소</button>
+            <button class="btn danger" type="submit">신고 접수</button>
+          </div>
+        </form>
+      </article>
+    </section>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <script src="./config.js?v=6.5.0"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.95.0/dist/umd/supabase.js"
+      integrity="sha384-XOgt1ZFimk4zHEFJt46uyOeRhPxz22jaYBEJlZAE8Ie/gBMAZv/K6K4iB5CnoMRX"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./content-policy.js?v=6.5.0"></script>
+    <script src="./app.js?v=6.5.0"></script>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-label="교사링크">
+  <rect width="192" height="192" rx="44" fill="#ff6f3d" />
+  <path d="M42 58h108v76H42z" fill="#fff8ef" />
+  <path d="M42 58l54 39 54-39" fill="none" stroke="#153f3c" stroke-linejoin="round" stroke-width="12" />
+  <circle cx="96" cy="119" r="15" fill="#ffbd3e" />
+</svg>

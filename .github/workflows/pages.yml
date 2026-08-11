@@ -1,0 +1,70 @@
+name: Test and deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Check JavaScript syntax
+        run: |
+          node --check app.js
+          node --check content-policy.js
+          node --check service-worker.js
+          node --check scripts/build-pages.mjs
+      - name: Run static policy tests
+        run: |
+          node tests/security-check.mjs
+          node tests/content-policy-check.mjs
+          node tests/responsive-check.mjs
+          node tests/notification-check.mjs
+      - name: Run PostgreSQL security integration tests
+        run: tests/run-postgres-security.sh
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Build static site
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ vars.SUPABASE_PUBLISHABLE_KEY }}
+          KAKAO_MAP_JAVASCRIPT_KEY: ${{ vars.KAKAO_MAP_JAVASCRIPT_KEY }}
+          TURNSTILE_SITE_KEY: ${{ vars.TURNSTILE_SITE_KEY }}
+          ALLOW_DEMO_MODE: ${{ vars.ALLOW_DEMO_MODE }}
+          PAGES_ORIGIN: https://${{ github.repository_owner }}.github.io
+        run: node scripts/build-pages.mjs
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
